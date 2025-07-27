@@ -1,0 +1,31 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+
+\tikzset{
+  block/.style = {
+    rectangle, draw, fill=white,
+    text width=8cm, align=center,
+    rounded corners, minimum height=1cm
+  },
+  arrow/.style = {thick, -{Stealth[]}}
+}
+
+\begin{document}
+\begin{tikzpicture}[node distance=1cm and 0cm]
+
+  % Nodes
+  \node [block] (step1) {1. Load cleaned panel: read \texttt{sa\_daily\_panel.parquet} (hotspots + weather)};
+  \node [block, below=of step1] (step2) {2. Generate target: compute \texttt{hotspots\_next}, derive \texttt{target\_next\_day} (≥ 10), drop residual NA rows};
+  \node [block, below=of step2] (step3) {3. Merge NDVI: left‑join \texttt{MODIS\_NDVI\_daily\_interp.csv}, fill gaps by regional median};
+  \node [block, below=of step3] (step4) {4. Feature engineering: compute VPD, DTR, API, FFDI, and interaction terms};
+  \node [block, below=of step4] (step5) {5. Save final feature panel to \texttt{panel\_features\_SA.parquet}};
+
+  % Arrows
+  \draw [arrow] (step1) -- (step2);
+  \draw [arrow] (step2) -- (step3);
+  \draw [arrow] (step3) -- (step4);
+  \draw [arrow] (step4) -- (step5);
+
+\end{tikzpicture}
+\end{document}
