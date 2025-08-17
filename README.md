@@ -42,12 +42,9 @@ Sources used:
 
 Clone the repo:
 ```bash
-git clone https://github.com/<your-username>/Assignment1-PartD.git
-cd Assignment1-PartD
+use your own path in cloab then:
+conda create -n python=3.10
 
-conda create -n comp7209 python=3.10
-conda activate comp7209
-pip install -r requirements.txt
 
 For questions or dataset access, please reach out:
 Wenze Wang – wenze.wang@student.adelaide.edu.au
